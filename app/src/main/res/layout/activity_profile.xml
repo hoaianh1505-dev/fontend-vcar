@@ -4,27 +4,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="#12131C">
 
-    <!-- Top Avatar Frame -->
+    <!-- Top Profile Header Area -->
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#1B1C26"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Avatar Frame with Border Accent -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/avatarFrame"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="60dp"
-        app:cardBackgroundColor="#1E1E1E"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="0dp"
+        android:id="@+id/avatarFrameOuter"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="128dp"
+        app:cardBackgroundColor="#3B82F6"
+        app:cardCornerRadius="52dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="24dp"
-            android:src="@drawable/ic_user_profile"
-            app:tint="#9CA3AF"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/avatarFrame"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:cardBackgroundColor="#1B1C26"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="22dp"
+                android:src="@drawable/ic_user_profile"
+                app:tint="#8A8C9E" />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>
 
@@ -33,12 +52,12 @@
         android:id="@+id/detailsCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginHorizontal="24dp"
-        app:cardBackgroundColor="#1E1E1E"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:layout_constraintTop_toBottomOf="@id/avatarFrame"
+        app:cardBackgroundColor="#1B1C26"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/avatarFrameOuter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -48,59 +67,121 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+            <!-- Row 1: Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Họ tên: -"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_user_profile"
+                    app:tint="#3B82F6" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Họ tên: -"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#2E2E2E"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"/>
+                android:background="#242533" />
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
+            <!-- Row 2: Email -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email: -"
-                android:textColor="#C0C0C0"
-                android:textSize="14sp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_email"
+                    app:tint="#3B82F6" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Email: -"
+                    android:textColor="#C0C2D3"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#2E2E2E"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"/>
+                android:background="#242533" />
 
-            <TextView
-                android:id="@+id/tvPhone"
-                android:layout_width="wrap_content"
+            <!-- Row 3: Phone -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Số điện thoại: -"
-                android:textColor="#C0C0C0"
-                android:textSize="14sp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_phone"
+                    app:tint="#3B82F6" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Số điện thoại: -"
+                    android:textColor="#C0C2D3"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#2E2E2E"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"/>
+                android:background="#242533" />
 
-            <TextView
-                android:id="@+id/tvRole"
-                android:layout_width="wrap_content"
+            <!-- Row 4: Role -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Quyền hạn: -"
-                android:textColor="#C0C0C0"
-                android:textSize="14sp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_shield"
+                    app:tint="#3B82F6" />
+
+                <TextView
+                    android:id="@+id/tvRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Quyền hạn: -"
+                    android:textColor="#C0C2D3"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -112,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginHorizontal="24dp"
         app:layout_constraintTop_toBottomOf="@id/detailsCard"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,11 +203,11 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Đăng xuất"
+            android:text="ĐĂNG XUẤT"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:backgroundTint="#EF4444"
-            app:cornerRadius="10dp"/>
+            app:cornerRadius="14dp" />
 
     </LinearLayout>
 
@@ -217,7 +298,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_user_profile"
-                app:tint="#2563EB"/>
+                app:tint="#3B82F6"/>
 
             <TextView
                 android:id="@+id/navProfileText"
@@ -225,7 +306,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Cá nhân"
-                android:textColor="#2563EB"
+                android:textColor="#3B82F6"
                 android:textSize="11sp"
                 android:textStyle="bold"/>
 

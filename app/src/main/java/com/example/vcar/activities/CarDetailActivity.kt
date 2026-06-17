@@ -39,6 +39,10 @@ class CarDetailActivity : AppCompatActivity() {
         txtPriceBottom = findViewById(R.id.txtPriceBottom)
         btnBooking = findViewById(R.id.btnBooking)
 
+        findViewById<android.view.View>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
+
         val carId = intent.getStringExtra("carId")
         val name = intent.getStringExtra("name")
         val brand = intent.getStringExtra("brand")
