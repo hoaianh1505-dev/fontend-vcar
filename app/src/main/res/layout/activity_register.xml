@@ -20,17 +20,10 @@
             android:padding="28dp"
             android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="start"
-                android:src="@drawable/ic_vcar_logo"
-                android:layout_marginBottom="24dp"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chào Mừng Trở Lại"
+                android:text="Đăng Ký Tài Khoản"
                 android:textStyle="bold"
                 android:textSize="28sp"
                 android:textColor="#FFFFFF"
@@ -40,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đăng nhập để tiếp tục khám phá và đặt dịch vụ xe"
+                android:text="Tạo tài khoản mới để trải nghiệm dịch vụ xe cao cấp"
                 android:textSize="14sp"
                 android:textColor="#8A8A8A"
                 android:layout_marginBottom="32dp"/>
@@ -48,6 +41,25 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Họ và Tên"
+                android:textColorHint="#7A7A7A"
+                app:hintTextColor="#2563EB"
+                app:boxStrokeColor="#2563EB"
+                app:boxBackgroundColor="#1E1E1E"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:inputType="textPersonName"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:hint="Email"
                 android:textColorHint="#7A7A7A"
                 app:hintTextColor="#2563EB"
@@ -67,7 +79,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Mật khẩu"
+                android:hint="Số Điện Thoại"
+                android:textColorHint="#7A7A7A"
+                app:hintTextColor="#2563EB"
+                app:boxStrokeColor="#2563EB"
+                app:boxBackgroundColor="#1E1E1E"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Mật Khẩu"
                 android:textColorHint="#7A7A7A"
                 app:hintTextColor="#2563EB"
                 app:boxStrokeColor="#2563EB"
@@ -84,12 +115,14 @@
                     android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
-                android:text="Đăng Nhập"
+                android:text="Đăng Ký"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
@@ -97,12 +130,12 @@
                 app:cornerRadius="12dp"/>
 
             <TextView
-                android:id="@+id/tvRegister"
+                android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:text="Chưa có tài khoản? Đăng ký ngay"
+                android:text="Đã có tài khoản? Đăng nhập ngay"
                 android:textColor="#2563EB"
                 android:textSize="14sp"/>
 

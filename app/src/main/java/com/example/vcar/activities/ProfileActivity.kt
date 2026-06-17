@@ -20,6 +20,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvEmail: TextView
     private lateinit var tvPhone: TextView
     private lateinit var tvRole: TextView
+    private lateinit var btnHistory: Button
     private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,29 +31,34 @@ class ProfileActivity : AppCompatActivity() {
         tvEmail = findViewById(R.id.tvEmail)
         tvPhone = findViewById(R.id.tvPhone)
         tvRole = findViewById(R.id.tvRole)
+        btnHistory = findViewById(R.id.btnHistory)
         btnLogout = findViewById(R.id.btnLogout)
 
         loadProfile()
+
+        btnHistory.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+        }
 
         btnLogout.setOnClickListener {
 
             SharedPrefManager(this).logout()
 
-            startActivity(
-                Intent(
-                    this,
-                    LoginActivity::class.java
-                )
-            )
-
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             finish()
         }
     }
 
     private fun loadProfile() {
 
-        val token =
-            SharedPrefManager(this).getToken()
+        val token = SharedPrefManager(this).getToken()
+        if (token == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
 
         RetrofitClient.api.getProfile(
             "Bearer $token"
@@ -62,16 +68,19 @@ class ProfileActivity : AppCompatActivity() {
                 call: Call<ProfileResponse>,
                 response: Response<ProfileResponse>
             ) {
-
                 if (response.isSuccessful) {
-
                     response.body()?.let {
-
-                        tvName.text = it.data.fullName
-                        tvEmail.text = it.data.email
-                        tvPhone.text = it.data.phone ?: ""
-                        tvRole.text = it.data.role
+                        tvName.text = "Họ tên: ${it.data.fullName}"
+                        tvEmail.text = "Email: ${it.data.email}"
+                        tvPhone.text = "Số điện thoại: ${it.data.phone ?: "Chưa cập nhật"}"
+                        tvRole.text = "Quyền hạn: ${it.data.role}"
                     }
+                } else {
+                    Toast.makeText(
+                        this@ProfileActivity,
+                        "Không lấy được thông tin cá nhân",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 

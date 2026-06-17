@@ -1,6 +1,4 @@
-package model
-
-import com.example.vcar.model.Booking
+package com.example.vcar.model
 
 data class BookingResponse(
     val success: Boolean,

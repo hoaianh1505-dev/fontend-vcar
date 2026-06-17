@@ -68,7 +68,8 @@ class CarAdapter(
         holder.txtLocation.text = car.location
 
         val imageUrl =
-            "https://backend-vcar.onrender.com${car.images[0]}"
+            if (car.images.isNotEmpty()) "https://backend-vcar.onrender.com${car.images[0]}"
+            else ""
 
         Glide.with(holder.itemView.context)
             .load(imageUrl)

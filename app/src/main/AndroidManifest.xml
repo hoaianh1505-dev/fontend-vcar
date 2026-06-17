@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.INTERNET"/>
-=======
     <uses-permission android:name="android.permission.INTERNET" />
->>>>>>> 76ff9a0a4e2cea4478fbef5287f21ef74f061a2a
 
     <application
         android:allowBackup="true"
@@ -18,8 +14,20 @@
         android:theme="@style/Theme.Vcar">
 
         <activity
-<<<<<<< HEAD
-            android:name=".activities.CarDetailActivity"
+            android:name=".activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activities.RegisterActivity"
             android:exported="false" />
 
         <activity
@@ -27,29 +35,20 @@
             android:exported="false" />
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.CarDetailActivity"
             android:exported="false" />
 
         <activity
-            android:name=".activities.SplashActivity"
-=======
-            android:name="com.example.vcar.activities.HistoryActivity"
+            android:name=".activities.ProfileActivity"
             android:exported="false" />
+
         <activity
-            android:name="com.example.vcar.activities.BookingActivity"
+            android:name=".activities.BookingActivity"
             android:exported="false" />
+
         <activity
-            android:name=".MainActivity"
->>>>>>> 76ff9a0a4e2cea4478fbef5287f21ef74f061a2a
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:name=".activities.HistoryActivity"
+            android:exported="false" />
 
     </application>
 

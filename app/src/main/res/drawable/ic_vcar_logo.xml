@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Rounded Shield/Hexagon Background -->
+    <path
+        android:pathData="M50,10 L85,28 L85,68 L50,90 L15,68 L15,28 Z"
+        android:fillColor="#1E1E1E"
+        android:strokeColor="#2563EB"
+        android:strokeWidth="3"/>
+
+    <!-- Stylized "V" speed lines in background -->
+    <path
+        android:pathData="M32,32 L50,68 L68,32"
+        android:strokeColor="#2E2E2E"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"/>
+
+    <!-- Premium Car Shape in the center -->
+    <path
+        android:pathData="M 72,46 L 68.8,36.5 C 68.4,35.5 67.5,34.8 66.5,34.8 L 33.5,34.8 C 32.5,34.8 31.6,35.5 31.2,36.5 L 28,46 C 27.3,47.8 26,50.8 26,53.5 L 26,71.5 C 26,72.3 26.7,73 27.5,73 L 30.5,73 C 31.3,73 32,72.3 32,71.5 L 32,68.5 L 68,68.5 L 68,71.5 C 68,72.3 68.7,73 69.5,73 L 72.5,73 C 73.3,73 74,72.3 74,71.5 L 74,53.5 C 74,50.8 72.7,47.8 72,46 Z M 35.5,39.5 L 64.5,39.5 L 67.7,49 L 32.3,49 L 35.5,39.5 Z M 67.5,62.5 C 66.1,62.5 65,61.4 65,60 C 65,58.6 66.1,57.5 67.5,57.5 C 68.9,57.5 70,58.6 70,60 C 70,61.4 68.9,62.5 67.5,62.5 Z M 32.5,62.5 C 31.1,62.5 30,61.4 30,60 C 30,58.6 31.1,57.5 32.5,57.5 C 33.9,57.5 35,58.6 35,60 C 35,61.4 33.9,62.5 32.5,62.5 Z"
+        android:fillColor="#2563EB"/>
+</vector>
