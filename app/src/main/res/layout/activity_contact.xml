@@ -121,7 +121,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Hotline: 1900 6789 (Hỗ trợ 24/7)"
+                            android:text="Hotline: 0363970865 (Hỗ trợ 24/7)"
                             android:textColor="#8A8C9E"
                             android:textSize="13sp"/>
                     </LinearLayout>
@@ -142,7 +142,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Email: support@vcarpremium.vn"
+                            android:text="Email: anhd78428@gmail.com"
                             android:textColor="#8A8C9E"
                             android:textSize="13sp"/>
                     </LinearLayout>
