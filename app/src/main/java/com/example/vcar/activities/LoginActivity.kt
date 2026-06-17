@@ -25,7 +25,9 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        android.util.Log.d("VCAR_LOGIN", "onCreate called")
         setContentView(R.layout.activity_login)
+        android.util.Log.d("VCAR_LOGIN", "setContentView finished")
 
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
@@ -39,7 +41,19 @@ class LoginActivity : AppCompatActivity() {
         tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+        android.util.Log.d("VCAR_LOGIN", "onCreate finished")
     }
+
+    override fun onStart() {
+        super.onStart()
+        android.util.Log.d("VCAR_LOGIN", "onStart called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        android.util.Log.d("VCAR_LOGIN", "onResume called")
+    }
+
 
     private fun performLogin() {
         val email = edtEmail.text.toString().trim()

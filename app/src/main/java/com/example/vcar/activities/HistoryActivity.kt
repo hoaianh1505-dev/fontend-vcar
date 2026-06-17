@@ -26,6 +26,14 @@ class HistoryActivity : AppCompatActivity() {
         rvHistory = findViewById(R.id.rvHistory)
         rvHistory.layoutManager = LinearLayoutManager(this)
 
+        findViewById<android.view.View>(R.id.navHome).setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
+        findViewById<android.view.View>(R.id.navProfile).setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
         loadBookingHistory()
     }
 

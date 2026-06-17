@@ -49,13 +49,13 @@ class CarDetailActivity : AppCompatActivity() {
         val available = intent.getBooleanExtra("available", false)
         val image = intent.getStringExtra("image")
 
-        txtName.text = name
-        txtBrand.text = "Hãng: $brand"
+        txtName.text = name ?: "Chưa có tên"
+        txtBrand.text = "Hãng: ${brand ?: "Chưa rõ"}"
         txtYear.text = "Năm sản xuất: $year"
         txtPrice.text = "Giá thuê: $price USD/ngày"
         txtPriceBottom.text = "$price $/ngày"
-        txtLocation.text = "Địa điểm: $location"
-        txtDescription.text = description
+        txtLocation.text = "Địa điểm: ${location ?: "Chưa rõ"}"
+        txtDescription.text = description ?: "Không có mô tả chi tiết."
 
         txtStatus.text =
             if (available) "Còn xe"

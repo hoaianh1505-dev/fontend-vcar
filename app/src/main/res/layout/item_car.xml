@@ -10,24 +10,45 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="#1E1E1E"
+    app:cardBackgroundColor="#1B1C26"
     app:cardCornerRadius="16dp"
-    app:cardElevation="2dp">
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
 
-        <ImageView
-            android:id="@+id/imgCar"
+        <!-- Image Container with Status Overlay -->
+        <FrameLayout
+            android:id="@+id/imgContainer"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgCar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <!-- Availability Status Badge -->
+            <TextView
+                android:id="@+id/txtStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="12dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="SẴN SÀNG"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:background="#22C55E"/>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/txtName"
@@ -43,7 +64,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/txtPrice"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgCar"
+            app:layout_constraintTop_toBottomOf="@+id/imgContainer"
             tools:text="Tesla Model Y" />
 
         <TextView
@@ -64,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="#8A8A8A"
+            android:textColor="#8A8C9E"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/txtName"
             app:layout_constraintTop_toBottomOf="@+id/txtName"
@@ -76,10 +97,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
-            android:textColor="#C0C0C0"
+            android:textColor="#C0C2D3"
             android:textSize="13sp"
             app:drawableStartCompat="@android:drawable/ic_menu_mylocation"
-            app:drawableTint="#8A8A8A"
+            app:drawableTint="#8A8C9E"
             app:layout_constraintStart_toStartOf="@+id/txtName"
             app:layout_constraintTop_toBottomOf="@+id/txtBrand"
             tools:text="Hà Nội, Việt Nam" />

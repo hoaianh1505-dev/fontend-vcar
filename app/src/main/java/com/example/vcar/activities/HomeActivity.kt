@@ -2,13 +2,17 @@ package com.example.vcar.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vcar.R
 import com.example.vcar.adapter.CarAdapter
+import com.example.vcar.model.Car
 import com.example.vcar.model.CarsResponse
 import com.example.vcar.network.RetrofitClient
 import com.example.vcar.utils.SharedPrefManager
@@ -20,6 +24,9 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var rvCars: RecyclerView
     private lateinit var imgAvatar: View
+    private lateinit var edtSearch: EditText
+
+    private var masterCarsList: List<Car> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +43,29 @@ class HomeActivity : AppCompatActivity() {
 
         rvCars = findViewById(R.id.rvCars)
         imgAvatar = findViewById(R.id.imgAvatar)
+        edtSearch = findViewById(R.id.edtSearch)
 
         rvCars.layoutManager = LinearLayoutManager(this)
 
         imgAvatar.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
+
+        findViewById<android.view.View>(R.id.navHistory).setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+        }
+
+        findViewById<android.view.View>(R.id.navProfile).setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterCars(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         loadCars()
     }
@@ -56,8 +80,8 @@ class HomeActivity : AppCompatActivity() {
                     response: Response<CarsResponse>
                 ) {
                     if (response.isSuccessful) {
-                        val cars = response.body()?.data ?: emptyList()
-                        rvCars.adapter = CarAdapter(cars)
+                        masterCarsList = response.body()?.data ?: emptyList()
+                        rvCars.adapter = CarAdapter(masterCarsList)
                     } else {
                         Toast.makeText(
                             this@HomeActivity,
@@ -78,5 +102,18 @@ class HomeActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+    }
+
+    private fun filterCars(query: String) {
+        val filtered = if (query.isEmpty()) {
+            masterCarsList
+        } else {
+            masterCarsList.filter {
+                it.name?.contains(query, ignoreCase = true) == true || 
+                it.brand?.contains(query, ignoreCase = true) == true ||
+                it.location?.contains(query, ignoreCase = true) == true
+            }
+        }
+        rvCars.adapter = CarAdapter(filtered)
     }
 }

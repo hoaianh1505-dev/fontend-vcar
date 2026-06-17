@@ -62,14 +62,23 @@ class CarAdapter(
 
         val car = cars[position]
 
-        holder.txtName.text = car.name
-        holder.txtBrand.text = car.brand
-        holder.txtPrice.text = "${car.pricePerDay}$/day"
-        holder.txtLocation.text = car.location
+        holder.txtName.text = car.name ?: "Chưa có tên"
+        holder.txtBrand.text = car.brand ?: "Chưa rõ hãng"
+        holder.txtPrice.text = "${car.pricePerDay ?: 0.0}$/day"
+        holder.txtLocation.text = car.location ?: "Chưa rõ địa điểm"
 
         val imageUrl =
-            if (car.images.isNotEmpty()) "https://backend-vcar.onrender.com${car.images[0]}"
+            if (!car.images.isNullOrEmpty()) "https://backend-vcar.onrender.com${car.images[0]}"
             else ""
+
+        val statusBadge = holder.itemView.findViewById<TextView>(R.id.txtStatusBadge)
+        if (car.available == true) {
+            statusBadge.text = "SẴN SÀNG"
+            statusBadge.setBackgroundColor(android.graphics.Color.parseColor("#22C55E"))
+        } else {
+            statusBadge.text = "ĐÃ THUÊ"
+            statusBadge.setBackgroundColor(android.graphics.Color.parseColor("#EF4444"))
+        }
 
         Glide.with(holder.itemView.context)
             .load(imageUrl)
@@ -85,11 +94,11 @@ class CarAdapter(
             intent.putExtra("carId", car._id)
             intent.putExtra("name", car.name)
             intent.putExtra("brand", car.brand)
-            intent.putExtra("year", car.year)
-            intent.putExtra("price", car.pricePerDay)
+            intent.putExtra("year", car.year ?: 0)
+            intent.putExtra("price", car.pricePerDay ?: 0.0)
             intent.putExtra("description", car.description)
             intent.putExtra("location", car.location)
-            intent.putExtra("available", car.available)
+            intent.putExtra("available", car.available ?: false)
             intent.putExtra("image", imageUrl)
 
             holder.itemView.context

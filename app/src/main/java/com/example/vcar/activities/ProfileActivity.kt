@@ -20,7 +20,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvEmail: TextView
     private lateinit var tvPhone: TextView
     private lateinit var tvRole: TextView
-    private lateinit var btnHistory: Button
     private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +30,15 @@ class ProfileActivity : AppCompatActivity() {
         tvEmail = findViewById(R.id.tvEmail)
         tvPhone = findViewById(R.id.tvPhone)
         tvRole = findViewById(R.id.tvRole)
-        btnHistory = findViewById(R.id.btnHistory)
         btnLogout = findViewById(R.id.btnLogout)
 
         loadProfile()
 
-        btnHistory.setOnClickListener {
+        findViewById<android.view.View>(R.id.navHome).setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
+        findViewById<android.view.View>(R.id.navHistory).setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
@@ -70,10 +72,10 @@ class ProfileActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        tvName.text = "Họ tên: ${it.data.fullName}"
-                        tvEmail.text = "Email: ${it.data.email}"
+                        tvName.text = "Họ tên: ${it.data.fullName ?: "Chưa cập nhật"}"
+                        tvEmail.text = "Email: ${it.data.email ?: "Chưa cập nhật"}"
                         tvPhone.text = "Số điện thoại: ${it.data.phone ?: "Chưa cập nhật"}"
-                        tvRole.text = "Quyền hạn: ${it.data.role}"
+                        tvRole.text = "Quyền hạn: ${it.data.role ?: "user"}"
                     }
                 } else {
                     Toast.makeText(

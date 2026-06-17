@@ -29,6 +29,9 @@ class BookingAdapter(
 
         val txtStatus: TextView =
             itemView.findViewById(R.id.txtStatus)
+
+        val btnContact: View =
+            itemView.findViewById(R.id.btnContact)
     }
 
     override fun onCreateViewHolder(
@@ -79,6 +82,14 @@ class BookingAdapter(
                 holder.txtStatus.text = "Trạng thái: Đang chờ duyệt"
                 holder.txtStatus.setTextColor(android.graphics.Color.parseColor("#F59E0B"))
             }
+        }
+
+        holder.btnContact.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = android.content.Intent(android.content.Intent.ACTION_DIAL).apply {
+                data = android.net.Uri.parse("tel:0363970865")
+            }
+            context.startActivity(intent)
         }
     }
 }

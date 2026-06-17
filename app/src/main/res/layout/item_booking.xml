@@ -55,13 +55,35 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"/>
 
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#2563EB"
-            android:textSize="13sp"
-            android:textStyle="bold"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#2563EB"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContact"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Liên hệ"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#2563EB"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="16dp"
+                app:cornerRadius="6dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
