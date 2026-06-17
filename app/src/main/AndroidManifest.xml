@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> 76ff9a0a4e2cea4478fbef5287f21ef74f061a2a
 
     <application
         android:allowBackup="true"
@@ -14,6 +18,7 @@
         android:theme="@style/Theme.Vcar">
 
         <activity
+<<<<<<< HEAD
             android:name=".activities.CarDetailActivity"
             android:exported="false" />
 
@@ -27,6 +32,15 @@
 
         <activity
             android:name=".activities.SplashActivity"
+=======
+            android:name="com.example.vcar.activities.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.vcar.activities.BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+>>>>>>> 76ff9a0a4e2cea4478fbef5287f21ef74f061a2a
             android:exported="true">
 
             <intent-filter>
