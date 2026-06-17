@@ -23,7 +23,6 @@ import retrofit2.Response
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var rvCars: RecyclerView
-    private lateinit var imgAvatar: View
     private lateinit var edtSearch: EditText
 
     private var masterCarsList: List<Car> = emptyList()
@@ -42,14 +41,9 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         rvCars = findViewById(R.id.rvCars)
-        imgAvatar = findViewById(R.id.imgAvatar)
         edtSearch = findViewById(R.id.edtSearch)
 
         rvCars.layoutManager = LinearLayoutManager(this)
-
-        imgAvatar.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
 
         findViewById<android.view.View>(R.id.navHistory).setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
