@@ -15,13 +15,13 @@
         android:theme="@style/Theme.Vcar">
 
         <activity
-            android:name=".activities.ProfileActivity" />
-
+            android:name="com.example.vcar.activities.HistoryActivity"
+            android:exported="false" />
         <activity
-            android:name=".activities.CarDetailActivity" />
-
+            android:name="com.example.vcar.activities.BookingActivity"
+            android:exported="false" />
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
             <intent-filter>
