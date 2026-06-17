@@ -281,6 +281,36 @@
 
         </LinearLayout>
 
+        <!-- Contact Tab -->
+        <LinearLayout
+            android:id="@+id/navContact"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/navContactIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_phone"
+                app:tint="#8A8C9E"/>
+
+            <TextView
+                android:id="@+id/navContactText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Liên hệ"
+                android:textColor="#8A8C9E"
+                android:textSize="11sp"/>
+
+        </LinearLayout>
+
         <!-- Profile Tab (Active) -->
         <LinearLayout
             android:id="@+id/navProfile"

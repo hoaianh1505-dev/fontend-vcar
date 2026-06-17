@@ -42,6 +42,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
+        findViewById<android.view.View>(R.id.navContact).setOnClickListener {
+            startActivity(Intent(this, ContactActivity::class.java))
+        }
+
         btnLogout.setOnClickListener {
 
             SharedPrefManager(this).logout()

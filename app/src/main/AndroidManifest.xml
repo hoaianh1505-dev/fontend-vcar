@@ -50,6 +50,10 @@
             android:name=".activities.HistoryActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".activities.ContactActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

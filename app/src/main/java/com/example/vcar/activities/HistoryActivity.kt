@@ -34,6 +34,10 @@ class HistoryActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
+        findViewById<android.view.View>(R.id.navContact).setOnClickListener {
+            startActivity(Intent(this, ContactActivity::class.java))
+        }
+
         loadBookingHistory()
     }
 

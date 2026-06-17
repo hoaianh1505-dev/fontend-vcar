@@ -53,18 +53,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
-        findViewById<View>(R.id.cardGoogleMap).setOnClickListener {
-            val query = "123 Đường 3/2, Quận 10, Hồ Chí Minh"
-            val uri = android.net.Uri.parse("geo:0,0?q=" + android.net.Uri.encode(query))
-            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            try {
-                startActivity(mapIntent)
-            } catch (e: Exception) {
-                val browserUri = android.net.Uri.parse("https://www.google.com/maps/search/?api=1&query=" + android.net.Uri.encode(query))
-                val browserIntent = Intent(Intent.ACTION_VIEW, browserUri)
-                startActivity(browserIntent)
-            }
+        findViewById<android.view.View>(R.id.navContact).setOnClickListener {
+            startActivity(Intent(this, ContactActivity::class.java))
         }
 
         edtSearch.addTextChangedListener(object : TextWatcher {
