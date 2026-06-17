@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vcar">
         <activity
+            android:name="com.example.vcar.activities.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.vcar.activities.BookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
