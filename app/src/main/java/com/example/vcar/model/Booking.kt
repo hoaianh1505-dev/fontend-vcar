@@ -4,5 +4,6 @@ data class Booking(
     val _id: String,
     val rentalDate: String,
     val status: String,
-    val carId: Car?
+    val carId: Car?,
+    val createdAt: String?
 )
