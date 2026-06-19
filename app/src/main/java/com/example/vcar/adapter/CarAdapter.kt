@@ -33,6 +33,12 @@ class CarAdapter(
 
         val txtLocation: TextView =
             itemView.findViewById(R.id.txtLocation)
+
+        val txtSpecYear: TextView =
+            itemView.findViewById(R.id.txtSpecYear)
+
+        val txtStatusBadge: TextView =
+            itemView.findViewById(R.id.txtStatusBadge)
     }
 
     override fun onCreateViewHolder(
@@ -63,21 +69,23 @@ class CarAdapter(
         val car = cars[position]
 
         holder.txtName.text = car.name ?: "Chưa có tên"
-        holder.txtBrand.text = car.brand ?: "Chưa rõ hãng"
-        holder.txtPrice.text = "${car.pricePerDay ?: 0.0}$/day"
+        holder.txtBrand.text = car.brand?.uppercase() ?: "CHƯA RÕ"
+        holder.txtPrice.text = "$${car.pricePerDay ?: 0.0}"
         holder.txtLocation.text = car.location ?: "Chưa rõ địa điểm"
+        holder.txtSpecYear.text = "Đời ${car.year ?: 2024}"
 
         val imageUrl =
             if (!car.images.isNullOrEmpty()) "https://backend-vcar.onrender.com${car.images[0]}"
             else ""
 
-        val statusBadge = holder.itemView.findViewById<TextView>(R.id.txtStatusBadge)
         if (car.available == true) {
-            statusBadge.text = "SẴN SÀNG"
-            statusBadge.setBackgroundColor(android.graphics.Color.parseColor("#22C55E"))
+            holder.txtStatusBadge.text = "Còn xe"
+            holder.txtStatusBadge.setBackgroundResource(R.drawable.bg_badge_available)
+            holder.txtStatusBadge.setTextColor(android.graphics.Color.parseColor("#22C55E"))
         } else {
-            statusBadge.text = "ĐÃ THUÊ"
-            statusBadge.setBackgroundColor(android.graphics.Color.parseColor("#EF4444"))
+            holder.txtStatusBadge.text = "Hết xe"
+            holder.txtStatusBadge.setBackgroundResource(R.drawable.bg_badge_unavailable)
+            holder.txtStatusBadge.setTextColor(android.graphics.Color.parseColor("#EF4444"))
         }
 
         Glide.with(holder.itemView.context)
