@@ -300,8 +300,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBooking"
-                android:layout_width="160dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
+                android:minWidth="160dp"
+                android:paddingHorizontal="16dp"
                 android:text="ĐẶT XE NGAY"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
