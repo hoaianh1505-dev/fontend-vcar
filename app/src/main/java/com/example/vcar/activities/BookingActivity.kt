@@ -82,6 +82,12 @@ class BookingActivity : AppCompatActivity() {
                 - Nhận và bàn giao xe đúng giờ, đúng địa điểm đã thỏa thuận.
                 - Đảm bảo xe sạch sẽ và đầy đủ linh phụ kiện ban đầu khi hoàn trả.
 
+                5. Xác nhận đặt xe qua Hotline (QUAN TRỌNG):
+                - Sau khi gửi yêu cầu đặt xe thành công trên ứng dụng, quý khách bắt buộc phải thực hiện thêm 1 bước gọi trực tiếp đến số Hotline 0363970865 để nhân viên Vcar xác nhận thông tin và hoàn tất thủ tục đặt xe.
+
+                6. Giới hạn thời gian thuê xe:
+                - Ứng dụng này chỉ hỗ trợ đặt xe với giới hạn tối đa 1 ngày (24 giờ) cho mỗi lượt yêu cầu thuê.
+
                 Bằng việc nhấn "Đồng ý và Đặt xe", quý khách cam kết đã đọc, hiểu rõ và đồng ý tuân thủ toàn bộ các điều khoản nêu trên.
             """.trimIndent()
 
@@ -126,7 +132,18 @@ class BookingActivity : AppCompatActivity() {
                     Toast.makeText(this@BookingActivity, "Đặt xe thành công!", Toast.LENGTH_LONG).show()
                     finish()
                 } else {
-                    Toast.makeText(this@BookingActivity, "Không đặt được xe. Vui lòng thử lại", Toast.LENGTH_SHORT).show()
+                    val errorMsg = try {
+                        val errorBodyString = response.errorBody()?.string()
+                        if (!errorBodyString.isNullOrEmpty()) {
+                            val json = org.json.JSONObject(errorBodyString)
+                            json.optString("message", "Không đặt được xe. Vui lòng thử lại")
+                        } else {
+                            "Không đặt được xe. Vui lòng thử lại"
+                        }
+                    } catch (e: Exception) {
+                        "Không đặt được xe. Vui lòng thử lại"
+                    }
+                    Toast.makeText(this@BookingActivity, errorMsg, Toast.LENGTH_LONG).show()
                 }
             }
 
