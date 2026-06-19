@@ -58,7 +58,45 @@ class BookingActivity : AppCompatActivity() {
         }
 
         btnBooking.setOnClickListener {
-            performBooking()
+            if (selectedDate.isEmpty()) {
+                Toast.makeText(this, "Vui lòng chọn ngày thuê xe", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val termsMessage = """
+                Chào mừng quý khách đến với dịch vụ thuê xe hạng sang Vcar. Vui lòng đọc kỹ các điều khoản dưới đây trước khi hoàn tất đặt xe:
+
+                1. Điều kiện đối với người lái xe:
+                - Có bằng lái xe hợp lệ tương thích với dòng xe đăng ký thuê.
+                - Phải xuất trình CCCD/Hộ chiếu bản gốc khi ký hợp đồng bàn giao xe.
+
+                2. Quy định an toàn và pháp lý:
+                - Tuyệt đối không lái xe khi đã uống rượu bia hoặc sử dụng chất kích thích.
+                - Không dùng xe vào mục đích phi pháp (vận chuyển hàng cấm, chở hàng lậu...).
+
+                3. Trách nhiệm vật chất & giao thông:
+                - Khách hàng tự chịu trách nhiệm chi trả toàn bộ các khoản phạt nguội, vi phạm giao thông phát sinh trong thời gian thuê xe.
+                - Khách hàng tự bồi thường chi phí sửa chữa đối với các hư hỏng hoặc va quẹt do lỗi chủ quan của bản thân.
+
+                4. Quy định nhận & trả xe:
+                - Nhận và bàn giao xe đúng giờ, đúng địa điểm đã thỏa thuận.
+                - Đảm bảo xe sạch sẽ và đầy đủ linh phụ kiện ban đầu khi hoàn trả.
+
+                Bằng việc nhấn "Đồng ý và Đặt xe", quý khách cam kết đã đọc, hiểu rõ và đồng ý tuân thủ toàn bộ các điều khoản nêu trên.
+            """.trimIndent()
+
+            com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle("ĐIỀU KHOẢN DỊCH VỤ THUÊ XE")
+                .setMessage(termsMessage)
+                .setPositiveButton("Đồng ý và Đặt xe") { dialog, _ ->
+                    dialog.dismiss()
+                    performBooking()
+                }
+                .setNegativeButton("Hủy bỏ") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
         }
     }
 
