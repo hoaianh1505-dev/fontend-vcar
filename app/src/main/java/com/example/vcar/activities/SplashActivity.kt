@@ -17,7 +17,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
-        val highlightsCard = findViewById<View>(R.id.highlightsCard)
+        val tvLoginLink = findViewById<android.widget.TextView>(R.id.tvLoginLink)
+        val tvCopyright = findViewById<android.widget.TextView>(R.id.tvCopyright)
         val token = SharedPrefManager(this).getToken()
 
         if (token != null) {
@@ -27,20 +28,35 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }, 1500)
         } else {
-            // User is not logged in, show onboarding cards and button with a smooth fade-in animation
-            highlightsCard.visibility = View.VISIBLE
+            // Setup formatted text for the login link
+            val linkHtmlText = "Bạn đã có tài khoản? <font color='#FFFFFF'><b>Đăng nhập</b></font>"
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                tvLoginLink.text = android.text.Html.fromHtml(linkHtmlText, android.text.Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                @Suppress("DEPRECATION")
+                tvLoginLink.text = android.text.Html.fromHtml(linkHtmlText)
+            }
+
+            // User is not logged in, show and animate onboarding controls
             btnGetStarted.visibility = View.VISIBLE
+            tvLoginLink.visibility = View.VISIBLE
+            tvCopyright.visibility = View.VISIBLE
 
-            highlightsCard.alpha = 0f
             btnGetStarted.alpha = 0f
+            tvLoginLink.alpha = 0f
+            tvCopyright.alpha = 0f
 
-            highlightsCard.animate().alpha(1f).setDuration(800).start()
             btnGetStarted.animate().alpha(1f).setDuration(800).start()
+            tvLoginLink.animate().alpha(1f).setDuration(800).start()
+            tvCopyright.animate().alpha(1f).setDuration(800).start()
 
-            btnGetStarted.setOnClickListener {
+            val navigateToLogin = View.OnClickListener {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
+
+            btnGetStarted.setOnClickListener(navigateToLogin)
+            tvLoginLink.setOnClickListener(navigateToLogin)
         }
     }
 }
