@@ -17,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
+        val highlightsCard = findViewById<View>(R.id.highlightsCard)
         val token = SharedPrefManager(this).getToken()
 
         if (token != null) {
@@ -26,9 +27,14 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }, 1500)
         } else {
-            // User is not logged in, show the Get Started button with a smooth fade-in animation
+            // User is not logged in, show onboarding cards and button with a smooth fade-in animation
+            highlightsCard.visibility = View.VISIBLE
             btnGetStarted.visibility = View.VISIBLE
+
+            highlightsCard.alpha = 0f
             btnGetStarted.alpha = 0f
+
+            highlightsCard.animate().alpha(1f).setDuration(800).start()
             btnGetStarted.animate().alpha(1f).setDuration(800).start()
 
             btnGetStarted.setOnClickListener {
