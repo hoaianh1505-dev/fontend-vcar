@@ -143,13 +143,28 @@ class BookingActivity : AppCompatActivity() {
                     } catch (e: Exception) {
                         "Không đặt được xe. Vui lòng thử lại"
                     }
-                    Toast.makeText(this@BookingActivity, errorMsg, Toast.LENGTH_LONG).show()
+                    
+                    com.google.android.material.dialog.MaterialAlertDialogBuilder(this@BookingActivity)
+                        .setTitle("GIỚI HẠN THUÊ XE")
+                        .setMessage(errorMsg)
+                        .setPositiveButton("Đã hiểu") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 btnBooking.isEnabled = true
-                Toast.makeText(this@BookingActivity, "Lỗi kết nối: ${t.message}", Toast.LENGTH_SHORT).show()
+                com.google.android.material.dialog.MaterialAlertDialogBuilder(this@BookingActivity)
+                    .setTitle("LỖI KẾT NỐI")
+                    .setMessage("Không thể kết nối đến máy chủ: ${t.message}")
+                    .setPositiveButton("Đóng") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
             }
         })
     }
