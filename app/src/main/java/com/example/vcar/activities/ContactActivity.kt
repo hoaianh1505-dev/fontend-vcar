@@ -19,7 +19,37 @@ class ContactActivity : AppCompatActivity() {
         val mapWebView = findViewById<WebView>(R.id.mapWebView)
         mapWebView.settings.javaScriptEnabled = true
         mapWebView.webViewClient = WebViewClient()
-        mapWebView.loadUrl("https://maps.google.com/maps?q=123%20%C4%90%C6%B0%E1%BB%9Dng%203/2,%20Qu%E1%BA%ADn%2010,%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=15&ie=UTF8&iwloc=&output=embed")
+        
+        val mapHtml = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    html, body {
+                        margin: 0;
+                        padding: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        background-color: #242533;
+                    }
+                    iframe {
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                    }
+                </style>
+            </head>
+            <body>
+                <iframe 
+                    src="https://maps.google.com/maps?q=123%20%C4%90%C6%B0%E1%BB%9Dng%203/2,%20Qu%E1%BA%ADn%2010,%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen>
+                </iframe>
+            </body>
+            </html>
+        """.trimIndent()
+        mapWebView.loadDataWithBaseURL("https://maps.google.com", mapHtml, "text/html", "UTF-8", null)
 
         // Bottom Navigation Listeners
         findViewById<View>(R.id.navHome).setOnClickListener {
