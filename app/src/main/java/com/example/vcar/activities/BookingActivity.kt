@@ -59,7 +59,14 @@ class BookingActivity : AppCompatActivity() {
 
         btnBooking.setOnClickListener {
             if (selectedDate.isEmpty()) {
-                Toast.makeText(this, "Vui lòng chọn ngày thuê xe", Toast.LENGTH_SHORT).show()
+                com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                    .setTitle("CHƯA CHỌN NGÀY")
+                    .setMessage("Vui lòng nhấn nút 'CHỌN NGÀY NHẬN XE' để chọn ngày thuê trước khi tiến hành đặt xe.")
+                    .setPositiveButton("Đã hiểu") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .show()
                 return@setOnClickListener
             }
 
