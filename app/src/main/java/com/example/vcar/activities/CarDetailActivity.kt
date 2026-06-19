@@ -65,7 +65,17 @@ class CarDetailActivity : AppCompatActivity() {
             if (available) "Còn xe"
             else "Hết xe"
 
-        btnBooking.isEnabled = available
+        if (available) {
+            btnBooking.isEnabled = true
+            btnBooking.text = "ĐẶT XE NGAY"
+            btnBooking.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#3B82F6"))
+            btnBooking.setTextColor(android.graphics.Color.WHITE)
+        } else {
+            btnBooking.isEnabled = false
+            btnBooking.text = "XE ĐÃ ĐƯỢC THUÊ"
+            btnBooking.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#2E2F3E"))
+            btnBooking.setTextColor(android.graphics.Color.parseColor("#64748B"))
+        }
 
         Glide.with(this)
             .load(image)
