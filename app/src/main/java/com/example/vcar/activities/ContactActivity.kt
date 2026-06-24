@@ -82,5 +82,14 @@ class ContactActivity : AppCompatActivity() {
                 startActivity(browserIntent)
             }
         }
+
+        // Emergency SOS Click Intent
+        findViewById<View>(R.id.btnEmergencySOS).setOnClickListener {
+            val emergencyNumber = "0363970865" // Hotline 24/7
+            val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$emergencyNumber")
+            }
+            startActivity(dialIntent)
+        }
     }
 }

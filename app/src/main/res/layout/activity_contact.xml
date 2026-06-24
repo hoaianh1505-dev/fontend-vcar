@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="24dp">
+            android:paddingBottom="88dp">
 
             <!-- Contact & Policy Container Card -->
             <androidx.cardview.widget.CardView
@@ -145,6 +145,35 @@
                             android:text="Email: anhd78428@gmail.com"
                             android:textColor="#8A8C9E"
                             android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <!-- Emergency SOS Button -->
+                    <LinearLayout
+                        android:id="@+id/btnEmergencySOS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_emergency_button"
+                        android:gravity="center"
+                        android:paddingHorizontal="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_shield"
+                            app:tint="#FFFFFF"
+                            android:layout_marginEnd="8dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gọi cứu hộ khẩn cấp (SOS)"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
                     </LinearLayout>
 
                     <!-- Divider -->

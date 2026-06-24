@@ -18,71 +18,175 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:scrollbars="none">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đặt Lịch Thuê Xe"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vui lòng chọn ngày nhận xe để tiếp tục thủ tục"
-                android:textSize="13sp"
-                android:textColor="#8A8A8A"
-                android:layout_marginBottom="24dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ngày Thuê Xe"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPickDate"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="CHỌN NGÀY NHẬN XE"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#2E2E2E"
-                app:cornerRadius="10dp"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
-            <TextView
-                android:id="@+id/txtDate"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chưa chọn ngày nhận xe"
-                android:textColor="#C0C0C0"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:paddingVertical="16dp"
-                android:layout_marginTop="8dp"/>
+                android:orientation="vertical"
+                android:padding="24dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBooking"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="XÁC NHẬN ĐẶT XE"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:backgroundTint="#2563EB"
-                android:layout_marginTop="16dp"
-                app:cornerRadius="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đặt Lịch Thuê Xe"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="6dp"/>
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vui lòng chọn ngày nhận xe và cung cấp thông tin"
+                    android:textSize="13sp"
+                    android:textColor="#8A8C9E"
+                    android:layout_marginBottom="24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày Thuê Xe"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPickDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="CHỌN NGÀY NHẬN XE"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2E2E2E"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chưa chọn ngày nhận xe"
+                    android:textColor="#C0C0C0"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- Full Name -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họ và Tên"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/edtFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Nhập họ và tên"
+                    android:textColorHint="#5A5C70"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"/>
+
+                <!-- Phone Number -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số Điện Thoại"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/edtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Nhập số điện thoại"
+                    android:textColorHint="#5A5C70"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="phone"
+                    android:maxLines="1"/>
+
+                <!-- Driver's License (GPLX) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số GPLX (12 chữ số)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/edtLicenseNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Nhập 12 chữ số GPLX"
+                    android:textColorHint="#5A5C70"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:maxLines="1"/>
+
+                <!-- Address -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa Chỉ Nhận Xe"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:hint="Nhập địa chỉ nhận xe"
+                    android:textColorHint="#5A5C70"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBooking"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="XÁC NHẬN ĐẶT XE"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:backgroundTint="#2563EB"
+                    android:layout_marginTop="20dp"
+                    app:cornerRadius="12dp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 

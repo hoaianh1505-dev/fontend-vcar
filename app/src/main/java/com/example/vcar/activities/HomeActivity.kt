@@ -6,6 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
+import android.graphics.Color
+import android.graphics.Typeface
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,8 +27,16 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var rvCars: RecyclerView
     private lateinit var edtSearch: EditText
+    
+    private lateinit var chipAll: TextView
+    private lateinit var chipAvailable: TextView
+    private lateinit var chipVinfast: TextView
+    private lateinit var chipMercedes: TextView
+    private lateinit var chipBMW: TextView
+    private lateinit var chipToyota: TextView
 
     private var masterCarsList: List<Car> = emptyList()
+    private var selectedFilter: String = "All"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +53,38 @@ class HomeActivity : AppCompatActivity() {
 
         rvCars = findViewById(R.id.rvCars)
         edtSearch = findViewById(R.id.edtSearch)
+        
+        chipAll = findViewById(R.id.chipAll)
+        chipAvailable = findViewById(R.id.chipAvailable)
+        chipVinfast = findViewById(R.id.chipVinfast)
+        chipMercedes = findViewById(R.id.chipMercedes)
+        chipBMW = findViewById(R.id.chipBMW)
+        chipToyota = findViewById(R.id.chipToyota)
+
+        val chips = listOf(chipAll, chipAvailable, chipVinfast, chipMercedes, chipBMW, chipToyota)
+
+        fun selectChip(selectedChip: TextView, filterValue: String) {
+            selectedFilter = filterValue
+            for (chip in chips) {
+                if (chip == selectedChip) {
+                    chip.setBackgroundResource(R.drawable.bg_filter_chip_selected)
+                    chip.setTextColor(Color.WHITE)
+                    chip.setTypeface(null, Typeface.BOLD)
+                } else {
+                    chip.setBackgroundResource(R.drawable.bg_filter_chip_unselected)
+                    chip.setTextColor(Color.parseColor("#8A8C9E"))
+                    chip.setTypeface(null, Typeface.NORMAL)
+                }
+            }
+            applyFilters()
+        }
+
+        chipAll.setOnClickListener { selectChip(chipAll, "All") }
+        chipAvailable.setOnClickListener { selectChip(chipAvailable, "Available") }
+        chipVinfast.setOnClickListener { selectChip(chipVinfast, "VinFast") }
+        chipMercedes.setOnClickListener { selectChip(chipMercedes, "Mercedes") }
+        chipBMW.setOnClickListener { selectChip(chipBMW, "BMW") }
+        chipToyota.setOnClickListener { selectChip(chipToyota, "Toyota") }
 
         rvCars.layoutManager = LinearLayoutManager(this)
 
@@ -66,7 +109,7 @@ class HomeActivity : AppCompatActivity() {
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterCars(s.toString())
+                applyFilters()
             }
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -85,7 +128,7 @@ class HomeActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         masterCarsList = response.body()?.data ?: emptyList()
-                        rvCars.adapter = CarAdapter(masterCarsList)
+                        applyFilters()
                     } else {
                         Toast.makeText(
                             this@HomeActivity,
@@ -108,16 +151,38 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    private fun filterCars(query: String) {
-        val filtered = if (query.isEmpty()) {
-            masterCarsList
-        } else {
-            masterCarsList.filter {
-                it.name?.contains(query, ignoreCase = true) == true || 
-                it.brand?.contains(query, ignoreCase = true) == true ||
-                it.location?.contains(query, ignoreCase = true) == true
+    private fun applyFilters() {
+        val searchQuery = edtSearch.text.toString().trim()
+        var filteredList = masterCarsList
+
+        // 1. Apply category/status/brand filter
+        when (selectedFilter) {
+            "Available" -> {
+                filteredList = filteredList.filter { it.available == true }
+            }
+            "VinFast" -> {
+                filteredList = filteredList.filter { it.brand?.contains("VinFast", ignoreCase = true) == true }
+            }
+            "Mercedes" -> {
+                filteredList = filteredList.filter { it.brand?.contains("Mercedes", ignoreCase = true) == true }
+            }
+            "BMW" -> {
+                filteredList = filteredList.filter { it.brand?.contains("BMW", ignoreCase = true) == true }
+            }
+            "Toyota" -> {
+                filteredList = filteredList.filter { it.brand?.contains("Toyota", ignoreCase = true) == true }
             }
         }
-        rvCars.adapter = CarAdapter(filtered)
+
+        // 2. Apply search text query filter
+        if (searchQuery.isNotEmpty()) {
+            filteredList = filteredList.filter {
+                it.name?.contains(searchQuery, ignoreCase = true) == true ||
+                it.brand?.contains(searchQuery, ignoreCase = true) == true ||
+                it.location?.contains(searchQuery, ignoreCase = true) == true
+            }
+        }
+
+        rvCars.adapter = CarAdapter(filteredList)
     }
 }

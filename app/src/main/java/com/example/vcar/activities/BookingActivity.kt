@@ -21,6 +21,11 @@ class BookingActivity : AppCompatActivity() {
     private lateinit var btnPickDate: Button
     private lateinit var txtDate: TextView
     private lateinit var btnBooking: Button
+    
+    private lateinit var edtFullName: android.widget.EditText
+    private lateinit var edtPhone: android.widget.EditText
+    private lateinit var edtLicenseNumber: android.widget.EditText
+    private lateinit var edtAddress: android.widget.EditText
 
     private var selectedDate: String = ""
     private var carId: String? = null
@@ -39,6 +44,32 @@ class BookingActivity : AppCompatActivity() {
         btnPickDate = findViewById(R.id.btnPickDate)
         txtDate = findViewById(R.id.txtDate)
         btnBooking = findViewById(R.id.btnBooking)
+        
+        edtFullName = findViewById(R.id.edtFullName)
+        edtPhone = findViewById(R.id.edtPhone)
+        edtLicenseNumber = findViewById(R.id.edtLicenseNumber)
+        edtAddress = findViewById(R.id.edtAddress)
+
+        // Pre-fill profile info (fullName and phone)
+        val token = SharedPrefManager(this).getToken()
+        if (token != null) {
+            RetrofitClient.api.getProfile("Bearer $token").enqueue(object : Callback<com.example.vcar.model.ProfileResponse> {
+                override fun onResponse(call: Call<com.example.vcar.model.ProfileResponse>, response: Response<com.example.vcar.model.ProfileResponse>) {
+                    if (response.isSuccessful) {
+                        val user = response.body()?.data
+                        user?.let {
+                            if (!it.fullName.isNullOrEmpty() && edtFullName.text.isEmpty()) {
+                                edtFullName.setText(it.fullName)
+                            }
+                            if (!it.phone.isNullOrEmpty() && edtPhone.text.isEmpty()) {
+                                edtPhone.setText(it.phone)
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<com.example.vcar.model.ProfileResponse>, t: Throwable) {}
+            })
+        }
 
         btnPickDate.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -67,6 +98,32 @@ class BookingActivity : AppCompatActivity() {
                     }
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .show()
+                return@setOnClickListener
+            }
+
+            val fullName = edtFullName.text.toString().trim()
+            val phone = edtPhone.text.toString().trim()
+            val license = edtLicenseNumber.text.toString().trim()
+            val address = edtAddress.text.toString().trim()
+
+            if (fullName.isEmpty()) {
+                edtFullName.error = "Vui lòng nhập họ và tên"
+                edtFullName.requestFocus()
+                return@setOnClickListener
+            }
+            if (phone.isEmpty()) {
+                edtPhone.error = "Vui lòng nhập số điện thoại"
+                edtPhone.requestFocus()
+                return@setOnClickListener
+            }
+            if (license.isEmpty() || !license.matches(Regex("^[0-9]{12}$"))) {
+                edtLicenseNumber.error = "Số GPLX không hợp lệ (phải đúng 12 chữ số)"
+                edtLicenseNumber.requestFocus()
+                return@setOnClickListener
+            }
+            if (address.isEmpty()) {
+                edtAddress.error = "Vui lòng nhập địa chỉ nhận xe"
+                edtAddress.requestFocus()
                 return@setOnClickListener
             }
 
@@ -103,7 +160,7 @@ class BookingActivity : AppCompatActivity() {
                 .setMessage(termsMessage)
                 .setPositiveButton("Đồng ý và Đặt xe") { dialog, _ ->
                     dialog.dismiss()
-                    performBooking()
+                    performBooking(fullName, phone, license, address)
                 }
                 .setNegativeButton("Hủy bỏ") { dialog, _ ->
                     dialog.dismiss()
@@ -113,7 +170,7 @@ class BookingActivity : AppCompatActivity() {
         }
     }
 
-    private fun performBooking() {
+    private fun performBooking(fullName: String, phone: String, license: String, address: String) {
         if (selectedDate.isEmpty()) {
             Toast.makeText(this, "Vui lòng chọn ngày thuê xe", Toast.LENGTH_SHORT).show()
             return
@@ -127,7 +184,7 @@ class BookingActivity : AppCompatActivity() {
         }
 
         btnBooking.isEnabled = false
-        val request = BookingRequest(carId!!, selectedDate)
+        val request = BookingRequest(carId!!, selectedDate, fullName, phone, license, address)
 
         RetrofitClient.api.createBooking(
             "Bearer $token",

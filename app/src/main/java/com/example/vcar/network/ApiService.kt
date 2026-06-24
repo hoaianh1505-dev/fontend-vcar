@@ -22,7 +22,11 @@ data class RegisterRequest(
 
 data class BookingRequest(
     val carId: String,
-    val rentalDate: String
+    val rentalDate: String,
+    val fullName: String,
+    val phoneNumber: String,
+    val licenseNumber: String,
+    val address: String
 )
 
 interface ApiService {
