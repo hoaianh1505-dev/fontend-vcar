@@ -113,5 +113,10 @@ class ContactActivity : AppCompatActivity() {
                 // Fallback if no email client installed
             }
         }
+
+        // Showroom Address click opens Map
+        findViewById<View>(R.id.cardAddress).setOnClickListener {
+            findViewById<View>(R.id.cardGoogleMap).performClick()
+        }
     }
 }
