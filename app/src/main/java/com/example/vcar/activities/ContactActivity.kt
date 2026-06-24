@@ -91,5 +91,27 @@ class ContactActivity : AppCompatActivity() {
             }
             startActivity(dialIntent)
         }
+
+        // Quick Hotline Call Card
+        findViewById<View>(R.id.cardPhone).setOnClickListener {
+            val hotlineNumber = "0363970865"
+            val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$hotlineNumber")
+            }
+            startActivity(dialIntent)
+        }
+
+        // Quick Email Intent Card
+        findViewById<View>(R.id.cardEmail).setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:anhd78428@gmail.com")
+                putExtra(Intent.EXTRA_SUBJECT, "Hỗ trợ dịch vụ VCar")
+            }
+            try {
+                startActivity(emailIntent)
+            } catch (e: Exception) {
+                // Fallback if no email client installed
+            }
+        }
     }
 }
