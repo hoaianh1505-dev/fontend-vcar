@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="6dp">
+
+    <!-- USER MESSAGE CONTAINER (Aligned Right) -->
+    <LinearLayout
+        android:id="@+id/layoutUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/txtUserMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="260dp"
+            android:text="Tôi cần tìm xe đi du lịch"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:background="@drawable/bg_filter_chip_selected"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp"/>
+    </LinearLayout>
+
+    <!-- AI ASSISTANT MESSAGE CONTAINER (Aligned Left) -->
+    <LinearLayout
+        android:id="@+id/layoutAI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_robot"
+                android:background="#1B1C26"
+                android:padding="6dp"
+                app:tint="#3B82F6"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/txtAIMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="260dp"
+                android:text="Chào bạn! Tôi gợi ý các dòng xe sau..."
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:background="@drawable/bg_filter_chip_unselected"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp"/>
+        </LinearLayout>
+
+        <!-- Dynamic horizontal cars suggestions list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecommendedCars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:listitem="@layout/item_car"/>
+
+    </LinearLayout>
+
+</LinearLayout>

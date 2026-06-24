@@ -29,6 +29,20 @@ data class BookingRequest(
     val address: String
 )
 
+data class AiRecommendRequest(
+    val query: String
+)
+
+data class AiRecommendData(
+    val recommendation: String,
+    val recommendedCars: List<com.example.vcar.model.Car>
+)
+
+data class AiRecommendResponse(
+    val success: Boolean,
+    val data: AiRecommendData
+)
+
 interface ApiService {
 
     @POST("api/auth/login")
@@ -62,4 +76,11 @@ interface ApiService {
         @Header("Authorization")
         token: String
     ): Call<BookingResponse>
+
+    @POST("api/ai/recommend")
+    fun getAiRecommendation(
+        @Header("Authorization")
+        token: String,
+        @Body request: AiRecommendRequest
+    ): Call<AiRecommendResponse>
 }

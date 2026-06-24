@@ -23,6 +23,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.vcar.model.ChatMessage
+import com.example.vcar.adapter.ChatAdapter
+import com.example.vcar.network.AiRecommendRequest
+import com.example.vcar.network.AiRecommendResponse
+
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var rvCars: RecyclerView
@@ -34,6 +40,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var chipMercedes: TextView
     private lateinit var chipBMW: TextView
     private lateinit var chipToyota: TextView
+    
+    private lateinit var fabAiChat: com.google.android.material.floatingactionbutton.FloatingActionButton
 
     private var masterCarsList: List<Car> = emptyList()
     private var selectedFilter: String = "All"
@@ -60,6 +68,8 @@ class HomeActivity : AppCompatActivity() {
         chipMercedes = findViewById(R.id.chipMercedes)
         chipBMW = findViewById(R.id.chipBMW)
         chipToyota = findViewById(R.id.chipToyota)
+        
+        fabAiChat = findViewById(R.id.fabAiChat)
 
         val chips = listOf(chipAll, chipAvailable, chipVinfast, chipMercedes, chipBMW, chipToyota)
 
@@ -85,6 +95,10 @@ class HomeActivity : AppCompatActivity() {
         chipMercedes.setOnClickListener { selectChip(chipMercedes, "Mercedes") }
         chipBMW.setOnClickListener { selectChip(chipBMW, "BMW") }
         chipToyota.setOnClickListener { selectChip(chipToyota, "Toyota") }
+
+        fabAiChat.setOnClickListener {
+            showAiChatDialog(token)
+        }
 
         rvCars.layoutManager = LinearLayoutManager(this)
 
@@ -115,6 +129,71 @@ class HomeActivity : AppCompatActivity() {
         })
 
         loadCars()
+    }
+
+    private fun showAiChatDialog(token: String) {
+        val bottomSheet = BottomSheetDialog(this)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_ai_chat, null)
+        bottomSheet.setContentView(dialogView)
+
+        val rvChatMessages = dialogView.findViewById<RecyclerView>(R.id.rvChatMessages)
+        val pbThinking = dialogView.findViewById<View>(R.id.pbThinking)
+        val edtChatMessage = dialogView.findViewById<EditText>(R.id.edtChatMessage)
+        val btnSendMessage = dialogView.findViewById<View>(R.id.btnSendMessage)
+        val btnCloseChat = dialogView.findViewById<View>(R.id.btnCloseChat)
+
+        val messagesList = mutableListOf<ChatMessage>()
+        messagesList.add(ChatMessage("Xin chào! Tôi là trợ lý ảo VCar AI. Bạn cần thuê xe cho mục đích gì (như du lịch gia đình, hẹn hò lãng mạn hay xe cưới)? Hãy nói để tôi đề xuất nhé!", false))
+
+        val chatAdapter = ChatAdapter(messagesList)
+        rvChatMessages.adapter = chatAdapter
+        rvChatMessages.layoutManager = LinearLayoutManager(this)
+
+        btnCloseChat.setOnClickListener {
+            bottomSheet.dismiss()
+        }
+
+        btnSendMessage.setOnClickListener {
+            val query = edtChatMessage.text.toString().trim()
+            if (query.isEmpty()) return@setOnClickListener
+
+            // Add user message
+            messagesList.add(ChatMessage(query, true))
+            chatAdapter.notifyItemInserted(messagesList.size - 1)
+            rvChatMessages.scrollToPosition(messagesList.size - 1)
+            edtChatMessage.setText("")
+
+            // Show loading and disable sending
+            pbThinking.visibility = View.VISIBLE
+            btnSendMessage.isEnabled = false
+
+            RetrofitClient.api.getAiRecommendation("Bearer $token", AiRecommendRequest(query))
+                .enqueue(object : Callback<AiRecommendResponse> {
+                    override fun onResponse(call: Call<AiRecommendResponse>, response: Response<AiRecommendResponse>) {
+                        pbThinking.visibility = View.GONE
+                        btnSendMessage.isEnabled = true
+
+                        if (response.isSuccessful && response.body() != null) {
+                            val aiResponse = response.body()!!.data
+                            messagesList.add(ChatMessage(aiResponse.recommendation, false, aiResponse.recommendedCars))
+                        } else {
+                            messagesList.add(ChatMessage("Rất tiếc, đã có sự cố xảy ra khi lấy gợi ý từ trợ lý AI. Vui lòng thử lại!", false))
+                        }
+                        chatAdapter.notifyItemInserted(messagesList.size - 1)
+                        rvChatMessages.scrollToPosition(messagesList.size - 1)
+                    }
+
+                    override fun onFailure(call: Call<AiRecommendResponse>, t: Throwable) {
+                        pbThinking.visibility = View.GONE
+                        btnSendMessage.isEnabled = true
+                        messagesList.add(ChatMessage("Không thể kết nối đến máy chủ AI: ${t.message}", false))
+                        chatAdapter.notifyItemInserted(messagesList.size - 1)
+                        rvChatMessages.scrollToPosition(messagesList.size - 1)
+                    }
+                })
+        }
+
+        bottomSheet.show()
     }
 
     private fun loadCars() {
