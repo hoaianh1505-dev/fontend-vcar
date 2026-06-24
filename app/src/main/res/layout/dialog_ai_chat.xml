@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#12131C"
+    android:background="@drawable/bg_bottom_sheet"
     android:paddingBottom="8dp">
 
     <!-- Header Section -->
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:paddingHorizontal="20dp"
-        android:background="#1B1C26">
+        android:background="@drawable/bg_bottom_sheet_header">
 
         <LinearLayout
             android:layout_width="wrap_content"

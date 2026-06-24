@@ -136,6 +136,9 @@ class HomeActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_ai_chat, null)
         bottomSheet.setContentView(dialogView)
 
+        // Set parent background to transparent to render custom rounded corners correctly
+        (dialogView.parent as? View)?.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+
         val rvChatMessages = dialogView.findViewById<RecyclerView>(R.id.rvChatMessages)
         val pbThinking = dialogView.findViewById<View>(R.id.pbThinking)
         val edtChatMessage = dialogView.findViewById<EditText>(R.id.edtChatMessage)
