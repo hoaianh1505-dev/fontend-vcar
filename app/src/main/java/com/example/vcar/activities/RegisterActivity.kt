@@ -37,6 +37,10 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
         tvLogin = findViewById(R.id.tvLogin)
 
+        findViewById<android.view.View>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
+
         btnRegister.setOnClickListener {
             performRegister()
         }

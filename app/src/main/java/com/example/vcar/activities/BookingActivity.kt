@@ -45,6 +45,10 @@ class BookingActivity : AppCompatActivity() {
         txtDate = findViewById(R.id.txtDate)
         btnBooking = findViewById(R.id.btnBooking)
         
+        findViewById<android.view.View>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
+        
         edtFullName = findViewById(R.id.edtFullName)
         edtPhone = findViewById(R.id.edtPhone)
         edtLicenseNumber = findViewById(R.id.edtLicenseNumber)

@@ -97,6 +97,8 @@
             tools:text="Tesla Model Y" />
 
         <!-- Location Info -->
+
+        <!-- Specifications Tags Grid -->
         <TextView
             android:id="@+id/txtLocation"
             android:layout_width="wrap_content"
@@ -111,7 +113,6 @@
             app:layout_constraintTop_toBottomOf="@+id/txtName"
             tools:text="Hà Nội, Việt Nam" />
 
-        <!-- Specifications Tags Grid -->
         <LinearLayout
             android:id="@+id/layoutSpecs"
             android:layout_width="0dp"
